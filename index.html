@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapardi Reddy | AWS Certified Data Engineer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #131c31;
+            --accent: #06b6d4;
+            --primary: #2563eb;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+        nav {
+            padding: 1.25rem 0;
+            position: fixed; top: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; color: var(--accent); text-decoration: none; font-size: 1.2rem; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        .hero { padding: 160px 0 60px; }
+        h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -1px; }
+        .subtitle { font-size: 1.4rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        
+        /* Updated Motto Style to fit one line */
+        .motto { 
+            font-size: 0.95rem; 
+            color: #64748b; 
+            margin-bottom: 1.5rem; 
+            font-style: italic; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis;
+        }
+        
+        .social-group { display: flex; gap: 25px; align-items: center; margin-bottom: 3rem; }
+        .social-icon { font-size: 1.8rem; color: var(--text-muted); transition: 0.3s; text-decoration: none; }
+        .social-icon:hover { transform: translateY(-3px); color: var(--accent); }
+
+        /* About Me Section */
+        .about-section { margin-top: 4rem; margin-bottom: 5rem; }
+        .about-heading { color: #8b5cf6; font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 4rem; }
+        .about-flex { display: flex; gap: 4rem; align-items: flex-start; }
+        .plates-column { flex: 0 0 320px; display: flex; flex-direction: column; gap: 2rem; }
+        
+        .stat-plate { 
+            background: rgba(30, 41, 59, 0.5); 
+            padding: 2.5rem 1.5rem; 
+            border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            text-align: center;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 180px;
+        }
+        .stat-plate:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(30, 41, 59, 0.8); }
+        .stat-num { display: block; font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1.2; }
+        .stat-label { font-size: 0.95rem; color: #fff; font-weight: 500; margin-top: 8px; display: block; }
+        .cert-link { color: var(--accent); font-size: 0.75rem; text-decoration: underline; margin-top: 15px; display: block; opacity: 0.8; }
+        
+        .text-column { flex: 1; color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; }
+        .text-column p { margin-bottom: 2rem; }
+
+        /* Experience Cards */
+        .exp-container { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 2rem; }
+        .exp-card { 
+            background: var(--bg-card); 
+            padding: 2.5rem; 
+            border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; }
+        .exp-title { font-size: 1.3rem; font-weight: 700; color: #fff; }
+        .exp-company { color: var(--accent); font-weight: 600; display: block; }
+        .exp-date { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        .exp-summary { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem; }
+        .tools-used { font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Sections Header */
+        section { padding: 100px 0; }
+        .section-header { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 3.5rem; display: block; border-left: 3px solid var(--accent); padding-left: 15px; }
+
+        /* Project Cards */
+        .project-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        .project-card { 
+            background: var(--bg-card); padding: 2.5rem; border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        }
+        .project-card:hover { border-color: var(--accent); }
+        .project-card h3 { color: #fff; margin-bottom: 1rem; font-size: 1.5rem; }
+        .project-card p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .tag { font-size: 0.75rem; background: rgba(6, 182, 212, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(6, 182, 212, 0.2); }
+
+        /* Technical Stack Plate Updates */
+        .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; }
+        .skill-box { 
+            background: var(--bg-card); 
+            padding: 2.2rem; 
+            border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .skill-box:hover { border-color: var(--accent); background: rgba(30, 41, 59, 0.4); }
+        .skill-box h4 { 
+            font-size: 0.85rem; 
+            color: var(--accent); 
+            margin-bottom: 1.5rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            border-left: 2px solid var(--accent);
+            padding-left: 10px;
+        }
+        .skill-list-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem 1rem;
+            list-style: none;
+        }
+        .skill-item {
+            color: #fff;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 15px;
+            line-height: 1.4;
+        }
+        .skill-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Education Styles */
+        .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .edu-card { background: var(--bg-card); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); }
+        .edu-degree { color: #fff; font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 0.3rem; }
+        .edu-uni { color: var(--accent); font-weight: 600; font-size: 0.9rem; display: block; }
+        .edu-location { color: var(--text-muted); font-size: 0.85rem; display: block; margin-top: 0.5rem; }
+
+        /* Contact Section */
+        .contact-section { text-align: center; max-width: 700px; margin: 0 auto; padding: 120px 1.5rem; }
+        .contact-section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
+        .contact-section p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2.5rem; }
+        .contact-btn { 
+            display: inline-block; padding: 16px 36px; 
+            background: var(--accent); color: var(--bg-primary); 
+            text-decoration: none; border-radius: 8px; 
+            font-weight: 700; transition: 0.3s; 
+        }
+        .contact-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        @media (max-width: 900px) {
+            .about-flex { flex-direction: column; gap: 2rem; }
+            .plates-column { width: 100%; flex: none; }
+            .skills-grid, .edu-grid { grid-template-columns: 1fr; }
+            .skill-list-grid { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 2.8rem; }
+            .motto { white-space: normal; } /* Allow wrap on mobile for readability */
+        }
+        @media (max-width: 600px) {
+            .skill-list-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-flex">
+            <a href="#" class="logo">KR</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#connect">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Kapardi Reddy</h1>
+            <p class="subtitle">Data Engineer specializing in ETL Pipelines & Cloud Infrastructure</p>
+            <p class="motto">Always learning, always improving, especially in cloud engineering, distributed systems, and end-to-end data architecture.</p>
+
+            <div class="social-group">
+                <a href="https://www.linkedin.com/in/kapardir" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/kapardireddy" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="mailto:kapardi21@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div class="about-section" id="about">
+                <h2 class="about-heading">About Me</h2>
+                <div class="about-flex">
+                    <div class="plates-column">
+                        <div class="stat-plate">
+                            <span class="stat-num">4+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/fedf4994b6e94532ac3671ab9eab39e1" target="_blank" class="stat-plate">
+                            <span class="stat-num" style="font-size: 1.8rem;">AWS Certified</span>
+                            <span class="stat-label">Data Engineer Associate</span>
+                            <span class="cert-link">Verify Credential →</span>
+                        </a>
+                    </div>
+
+                    <div class="text-column">
+                        <p>Data Engineer with 4+ years of experience designing scalable data pipelines, cloud-native ETL/ELT systems, and analytics ready data products across banking, healthcare, and enterprise environments. I specialize in building modern data architectures that support machine learning, real-time analytics, and high-availability applications.</p>
+                        
+                        <p>I work across the full data lifecycle: ingestion, modeling, orchestration, quality, and automation, using a strong toolkit that includes Python, SQL, Spark, Kafka, dbt, Airflow, AWS and Databricks. My experience spans both batch and streaming data systems, with hands-on work in DataOps, cloud migration, and performance optimization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background: var(--bg-secondary);">
+        <div class="container">
+            <span class="section-header">Professional Experience</span>
+            <div class="exp-container">
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-title">Data Engineer</span>
+                            <span class="exp-company">Elix Inc | MI, USA</span>
+                        </div>
+                        <span class="exp-date">Sep 2025 – Present</span>
+                    </div>
+                    <p class="exp-summary">Automated complex data ingestion processes using AWS Glue and PySpark to deliver certified datasets for BI. Focused on optimizing large-scale transformations, building dimensional models in Redshift for enterprise reporting, and implementing robust CI/CD pipelines via Jenkins. Additionally, engineered high-performance NoSQL storage solutions in DynamoDB to support low-latency real-time applications.</p>
+                    <p class="tools-used">Tools: AWS Glue, PySpark, Redshift, Power BI, Jenkins, DynamoDB</p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-title">Data Engineer</span>
+                            <span class="exp-company">Flagstar Bank | MI, USA</span>
+                        </div>
+                        <span class="exp-date">Aug 2024 – Apr 2025</span>
+                    </div>
+                    <p class="exp-summary">Engineered end-to-end ETL pipelines on Databricks to power cross-departmental analytics and machine learning workflows. Enhanced system performance through Delta Lake optimization and implemented rigorous schema validation to ensure data reliability. Automated pipeline monitoring and recovery logic using CloudWatch, while collaborating in Agile environments to deliver production-ready data products.</p>
+                    <p class="tools-used">Tools: Databricks, SQL, PySpark, Delta Lake, AWS S3, CloudWatch</p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-title">Data Engineer</span>
+                            <span class="exp-company">Capgemini | Bengaluru, India</span>
+                        </div>
+                        <span class="exp-date">Sep 2021 – April 2023</span>
+                    </div>
+                    <p class="exp-summary">Modernized legacy data infrastructure by migrating on-premise workflows to cloud-native architectures on AWS and Databricks. Developed modular data models using dbt and orchestrated complex DAGs with Apache Airflow (MWAA). Designed real-time streaming jobs for transactional data and standardized deployment processes using Docker to ensure consistency across environments.</p>
+                    <p class="tools-used">Tools: AWS, Databricks, dbt, Airflow, Apache Flink, Docker</p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-title">Machine Learning Intern</span>
+                            <span class="exp-company">Verzeo | Hyderabad, India</span>
+                        </div>
+                        <span class="exp-date">May 2020 – June 2021</span>
+                    </div>
+                    <p class="exp-summary">Managed large-scale data transformation and feature engineering tasks to support predictive modeling efforts. Developed and evaluated machine learning models for predictive analysis using Random Forests and Decision Trees. Collaborated on neural network design using TensorFlow and Keras, while utilizing cross-validation and hyperparameter tuning to refine model performance.</p>
+                    <p class="tools-used">Tools: Python, TensorFlow, Keras, Random Forests, Scikit-Learn</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <span class="section-header">Personal Projects</span>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Event-Driven Inventory System with Debezium</h3>
+                    <p>Built a real-time system using Debezium CDC to replace database triggers with Kafka consumers. Implemented scalable inventory aggregation and a Dockerized alerting service for low-stock email notifications.</p>
+                    <div class="tag-group">
+                        <span class="tag">Debezium</span><span class="tag">Kafka</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">SMTP</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Weather Data ETL Pipeline with Airflow and AWS</h3>
+                    <p>Implemented a scalable ETL pipeline that ingests real-time weather data from the Open-Meteo API, processes it using Python, and stores structured outputs in Amazon S3.</p>
+                    <div class="tag-group">
+                        <span class="tag">AWS EC2</span><span class="tag">Amazon S3</span><span class="tag">Apache Airflow</span><span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Real-Time User Data Pipeline (Kafka & Spark)</h3>
+                    <p>Developed a real-time streaming pipeline ingesting synthetic user data via API, streaming through Kafka, processing with Apache Spark, and storing in Cassandra.</p>
+                    <div class="tag-group">
+                        <span class="tag">Apache Kafka</span><span class="tag">Apache Spark</span><span class="tag">Cassandra</span><span class="tag">Docker</span><span class="tag">PySpark</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; text-align: center;">
+                <a href="https://github.com/kapardireddy" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">View More Projects on GitHub →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" style="background: var(--bg-secondary);">
+        <div class="container">
+            <span class="section-header">Technical Stack</span>
+            <div class="skills-grid">
+                
+                <div class="skill-box">
+                    <h4>Languages & Frameworks</h4>
+                    <ul class="skill-list-grid">
+                        <li class="skill-item">Python</li>
+                        <li class="skill-item">SQL</li>
+                        <li class="skill-item">R</li>
+                        <li class="skill-item">PowerShell</li>
+                        <li class="skill-item">Apache Spark</li>
+                        <li class="skill-item">Apache Flink</li>
+                        <li class="skill-item">dbt</li>
+                        <li class="skill-item">PyTest</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box">
+                    <h4>Cloud & Tools</h4>
+                    <ul class="skill-list-grid">
+                        <li class="skill-item">AWS Lambda</li>
+                        <li class="skill-item">AWS Glue</li>
+                        <li class="skill-item">Amazon S3</li>
+                        <li class="skill-item">Redshift</li>
+                        <li class="skill-item">Docker</li>
+                        <li class="skill-item">Kafka</li>
+                        <li class="skill-item">Airflow</li>
+                        <li class="skill-item">Terraform</li>
+                        <li class="skill-item">Databricks</li>
+                        <li class="skill-item">GH Actions</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box">
+                    <h4>Databases</h4>
+                    <ul class="skill-list-grid">
+                        <li class="skill-item">Aurora</li>
+                        <li class="skill-item">DynamoDB</li>
+                        <li class="skill-item">PostgreSQL</li>
+                        <li class="skill-item">MongoDB</li>
+                        <li class="skill-item">Snowflake</li>
+                        <li class="skill-item">Clickhouse</li>
+                        <li class="skill-item">Oracle</li>
+                        <li class="skill-item">MSSQL</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box">
+                    <h4>Visualization</h4>
+                    <ul class="skill-list-grid">
+                        <li class="skill-item">QuickSight</li>
+                        <li class="skill-item">Power BI</li>
+                        <li class="skill-item">Tableau</li>
+                        <li class="skill-item">Streamlit</li>
+                        <li class="skill-item">ArcGIS</li>
+                        <li class="skill-item">Superset</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <span class="section-header">Education</span>
+            <div class="edu-grid">
+                <div class="edu-card">
+                    <span class="edu-degree">Master of Science in Data Analytics Engineering</span>
+                    <span class="edu-uni">George Mason University</span>
+                    <span class="edu-location">Fairfax, VA</span>
+                </div>
+                <div class="edu-card">
+                    <span class="edu-degree">Bachelor of Technology in Electrical and Electronics Engineering</span>
+                    <span class="edu-uni">GITAM University</span>
+                    <span class="edu-location">Hyderabad, India</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="connect" class="contact-section">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p>Feel free to reach out if you’re looking for a data engineer or would like to connect. I’m open to opportunities involving building and maintaining scalable data pipelines, real-time data processing, and reliable data platforms.</p>
+            <a href="mailto:kapardi21@gmail.com" class="contact-btn">Get In Touch</a>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg-primary);">
+        <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 10px;">@2026 | Kapardi Reddy</p>
+        <p style="color: var(--text-muted); font-size: 0.75rem;">Data Engineer | AWS Certified | End-to-End Data Solutions | Apache Spark, Kafka, dbt, Docker | AWS, Databricks | Security & Network Management</p>
+    </footer>
+
+</body>
+</html>
